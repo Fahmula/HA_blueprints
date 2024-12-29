@@ -137,6 +137,16 @@ blueprint:
       icon: mdi:bell
       collapsed: true
       input:
+        ai_prompt:
+          name: AI Prompt
+          description: The text prompt for the AI to describe the image.
+          default: |-
+            Very briefly describe what you see in this image, but only if the image
+            has a person in it from my front laundry security camera. Your
+            message needs to be short to fit in a phone notification. Don't describe
+            stationary objects or buildings or the black gate and black letterbox.
+         selector:
+           text:
         title:
           name: Notification Title (Optional)
           description: |
