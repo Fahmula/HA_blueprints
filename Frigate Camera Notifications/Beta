@@ -940,6 +940,16 @@ actions:
   - if:
       - condition: !input master_condition
     then:
+      - action: camera.snapshot
+        data:
+          filename: www/latest.jpg
+        target:
+          entity_id: !input camera
+      - action: google_generative_ai_conversation.generate_content
+        data:
+          prompt: !input ai_prompt
+          image_filename: www/latest.jpg
+        response_variable: generated_content
       - choose:
           - alias: "Silence New Object Notifications"
             conditions:
@@ -1013,7 +1023,7 @@ actions:
                   zones_satisfied: "{{zone_single_satisfied and zone_multi_satisfied and zone_order_satisfied}}"
                   # Customisation of text
                   title: !input title
-                  message: !input message
+                  message: "{{ generated_content.text }}"
                   subtitle: !input subtitle
                   tap_action: !input tap_action
                   button_1: !input button_1
